@@ -1,0 +1,52 @@
+
+<link rel="import" href="../mat-demo/mat-demo.html">
+<link rel="import" href="d3-chart.html">
+<link rel="import" href="../d3-bar-graph/d3-bar-graph.html">
+<link rel="import" href="../d3-data-source/d3-data-source.html">
+<dom-module id="d3-chart-demo">
+
+    <template>
+
+        <mat-demo id='chart-demo' name="d3-chart" type="element" url="/elements/d3-chart">
+
+            <mat-demo-panel label="Default">
+                <script type="text/html">
+                    <d3-chart>
+                        <d3-data-source data='[data]'></d3-data-source>
+                        <d3-bar-graph></d3-bar-graph>
+                    </d3-chart>
+                </script>
+                <d3-chart id='bgChart'>
+                        <d3-data-source id='bgData' data='[[data]]'></d3-data-source>
+                        <d3-bar-graph></d3-bar-graph>
+                </d3-chart>
+            </mat-demo-panel>
+
+        </mat-demo>
+
+    </template>
+
+    <script>
+        Polymer({
+            // ELEMENT
+            is: 'd3-chart-demo',
+            properties: {
+                data: {
+                    type: Array,
+                    notify: true,
+                    value: function() { return []; }
+                }
+            },
+            attached: function() {
+                var self = this;
+                self.data = self.data || [];
+                self.async(function() {
+                    [10, 15, 30, 32, 45].forEach(function(d) {
+                        self.push('data', d);
+                    });
+                });
+            }
+        });
+    </script>
+
+</dom-module>
