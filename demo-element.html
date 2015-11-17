@@ -1,24 +1,23 @@
-
 <link rel="import" href="../mat-demo/mat-demo.html">
-<link rel="import" href="d3-chart.html">
-<link rel="import" href="../d3-bar-graph/d3-bar-graph.html">
+<link rel="import" href="../d3-chart/d3-chart.html">
+<link rel="import" href="../d3-force-layout/d3-force-layout.html">
 <link rel="import" href="../d3-data-source/d3-data-source.html">
-<dom-module id="d3-chart-demo">
+<dom-module id="d3-force-layout-demo">
 
     <template>
 
-        <mat-demo id='chart-demo' name="d3-chart" type="element" url="/elements/d3-chart">
+        <mat-demo id='chart-demo' name="d3-chart" type="element" url="/elements/d3-force-layout">
 
             <mat-demo-panel label="Default">
                 <script type="text/html">
                     <d3-chart>
                         <d3-data-source data='[data]'></d3-data-source>
-                        <d3-bar-graph></d3-bar-graph>
+                        <d3-force-layout></d3-force-layout>
                     </d3-chart>
                 </script>
                 <d3-chart id='bgChart'>
                         <d3-data-source id='bgData' data='[[data]]'></d3-data-source>
-                        <d3-bar-graph></d3-bar-graph>
+                        <d3-force-layout></d3-force-layout>
                 </d3-chart>
             </mat-demo-panel>
 
@@ -29,7 +28,7 @@
     <script>
         Polymer({
             // ELEMENT
-            is: 'd3-chart-demo',
+            is: 'd3-force-layout-demo',
             properties: {
                 data: {
                     type: Array,

@@ -1,13 +1,50 @@
-<script src="../tux-d3/tux-d3.js"></script>
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../tux-d3/tux-d3.html">
 <script>
   /* @polymerBehavior Tux.d3ForceLayout */
 
   TuxD3.ForceLayoutBehaviorImpl =  {
-    properties: {
-      name: "ForceLayoutBehavior"
-    }
+      properties: {
+          name: "ForceLayoutBehavior"
+      },
+
+      attached: function() {
+          var self = this;
+          self.async(function() {
+              self._refresh();
+          });
+      },
+
+      _computeWidth: function() {
+          var self = this;
+          var vp = self.parentNode.getViewPort();
+          return !XP.isVoid(self.width) ? self.width: vp.getBoundingClientRect().width;
+      },
+
+      _computeHeight: function() {
+          var self = this;
+          var vp = self.parentNode.getViewPort();
+          return !XP.isVoid(self.height) ? self.height: vp.getBoundingClientRect().height;
+      },
+
+      _refresh: function(data, delta) {
+          var self = this;
+          self._draw();
+      },
+
+      _draw: function() {
+          var self = this,
+              chart = d3.select(self.parentNode.getViewPort());
+          self.force = d3.layout.force()
+                                .charge(self.charge)
+                                .linkDistance(self.linkDistance)
+                                .size([self._computeWidth(), self._computeHeight()])
+          var graph = self.data;
+          
+      }
   };
 
   /* @polymerBehavior */
-  TuxD3.ForceLayoutBehavior = TuxD3.ForceLayoutBehaviorImpl;
+  TuxD3.ForceLayoutBehavior = [ TuxD3.ResizeableBehavior, TuxD3.DataConsumerBehavior, TuxD3.ForceLayoutBehaviorImpl ];
 </script>
